@@ -1,5 +1,5 @@
 import unittest
-from astdecorators import trampolined
+from astdecorators.trampoline import trampolined
 
 def factorial(x, acc=1):
     assert x >= 0
@@ -10,5 +10,7 @@ def factorial(x, acc=1):
 class TestTailRecElimination(unittest.TestCase):
 
     def test_factorial(self):
-        self.assertEqual(1, factorial(1000))
+        self.assertRaises(RuntimeError, lambda: factorial(1000))
+
+        decorated = trampolined(factorial)
 
